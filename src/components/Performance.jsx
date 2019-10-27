@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavLink from './NavLink';
 import Success from './Success';
 import WorkerInput from './WorkerInput';
 import WorkerExplained from './WorkerExplained';

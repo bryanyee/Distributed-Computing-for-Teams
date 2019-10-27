@@ -1,4 +1,5 @@
 const path = require('path');
+
 module.exports = {
   entry: [
     './src/index.js'
@@ -9,24 +10,34 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015', 'stage-1']
-      }
-    },
+    rules: [
       {
-         test: /\.scss?$/,
-         loader: 'style!css!sass',
-         include: path.join(__dirname, 'src', 'css')
-       }
+        test: /.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
+      },
+      {
+        test: /\.css|scss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ]
+      }
     ]
   },
   watch: true,
-  devTool: 'source-map',
+  devtool: 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,

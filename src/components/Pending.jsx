@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import PendingWorkers from './PendingWorkers';
 import PendingStart from './PendingStart';
 

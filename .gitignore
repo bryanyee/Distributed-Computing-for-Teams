@@ -6,7 +6,7 @@ deThread.postman_collection.json
 
 # Generated assets and logs.
 node_modules
-bundle.js
+bundle.js*
 *.log
 
 # Environment variables.

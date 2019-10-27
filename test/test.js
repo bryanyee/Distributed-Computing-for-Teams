@@ -8,7 +8,6 @@ import JoinSession from '../src/components/JoinSession';
 import Performance from '../src/components/Performance';
 import WorkerInput from '../src/components/workerInput';
 import LengthInput from '../src/components/lengthInput';
-import NavLink from '../src/components/NavLink';
 
 describe("Navbar", function () {
   it("contains one nav tag", function () {
@@ -68,7 +67,7 @@ describe("Performance Input Fields", function () {
     startMD5Decrypt : () => {inc++;}
   };
   let inc = 0;
-  
+
   it('doesn\'t explode upon render', () => {
     const wrapper = shallow(<Performance {...minProps}/>);
     expect((wrapper).length).to.equal(1);

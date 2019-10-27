@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import Pending from './Pending';
 import Performance from './Performance';
 import Participate from './Participate';
@@ -97,7 +97,7 @@ class JoinSession extends Component {
 		socket.on('master-disconnected', () => {
 			socket.disconnect();
 			terminateAllWorkers();
-			browserHistory.push('MasterDisconnect');
+			this.props.history.push('MasterDisconnect');
 		});
 
 		socket.on('client-disconnect', (data) => {
@@ -200,4 +200,4 @@ class JoinSession extends Component {
 	}
 }
 
-export default JoinSession;
+export default withRouter(JoinSession);
