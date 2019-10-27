@@ -20,7 +20,7 @@ exports.socketConnection = (io) => {
       state.master = socket;
       socket.emit('claim-master-response', { globalConnections: state.activeSocketCount });
       socket.broadcast.emit('master-claimed', { globalConnections: state.activeSocketCount });
-      
+
       socket.on('disconnect', () => {
         console.log(socket.id, 'master disconnected');
         socket.broadcast.emit('master-disconnected');
@@ -93,6 +93,7 @@ exports.socketConnection = (io) => {
 state = initState();
 
 function initState() {
+  console.log('initState');
   return {
     characterSet: undefined,
     calculating: false,
@@ -199,9 +200,13 @@ function distributeWork(socket) {
   }
 } // End of distributeWork
 
-exports.resetApp = () => {
-  disconnectSockets();
-  state = initState();
+exports.resetApp = (req, res) => {
+  if (req.body.code === process.env.RESET_SECRET) {
+    console.log('resetApp');
+    disconnectSockets();
+    state = initState();
+  }
+  res.send('done');
 };
 
 module.exports = exports;

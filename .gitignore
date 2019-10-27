@@ -6,7 +6,6 @@ notes
 *.log
 *.zip
 algLG.txt
-reset.js
 
 
 # Elastic Beanstalk Files
