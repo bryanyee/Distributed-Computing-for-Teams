@@ -1,14 +1,16 @@
-
-node_modules
 notes
-bundle.js
-notes
-*.log
 *.zip
 algLG.txt
 
+# Generated assets and logs.
+node_modules
+bundle.js
+*.log
 
-# Elastic Beanstalk Files
+# Environment variables.
+.env
+
+# Elastic Beanstalk Files.
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml

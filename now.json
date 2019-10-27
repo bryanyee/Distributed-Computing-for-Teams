@@ -1,0 +1,5 @@
+{
+  "env": {
+    "RESET_SECRET": "RESET_SECRET"
+  }
+}
