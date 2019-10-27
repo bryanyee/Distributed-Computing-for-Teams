@@ -1,6 +1,8 @@
-notes
-*.zip
+# Resources.
 algLG.txt
+notes
+deThread.postman_collection.json
+*.zip
 
 # Generated assets and logs.
 node_modules
