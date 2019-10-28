@@ -27,16 +27,9 @@ module.exports = {
       }
     ]
   },
-  watch: true,
-  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'] // Allow js & jsx imports without the file extension
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './',
-    inline: true
-  }
 };
 
 

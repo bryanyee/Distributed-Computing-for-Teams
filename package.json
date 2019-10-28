@@ -7,13 +7,13 @@
   "scripts": {
     "start": "node ./server/server.js",
     "startDev": "nodemon ./server/server.js",
-    "startDevServer": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --history-api-fallback",
+    "startDevServer": "node ./bin/webpack-dev-server.js --inline --history-api-fallback",
     "test": "mocha --reporter nyan --compilers js:babel-core/register --require ./test/.setup.js --recursive ./test",
     "enzyme": "mocha test/.setup.js test/test.js",
     "test:watch": "npm run test -- --watch",
     "test-routes": "mocha --timeout 20000 tests/",
-    "build": "webpack --mode=production",
-    "buildDev": "webpack --mode=development"
+    "build": "webpack --config webpack.prod.js",
+    "buildDev": "webpack --config webpack.dev.js"
   },
   "author": "Daniel Lao, Bryan Yee, Shawn Southwell",
   "license": "ISC",
@@ -44,7 +44,8 @@
     "supertest": "^2.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
