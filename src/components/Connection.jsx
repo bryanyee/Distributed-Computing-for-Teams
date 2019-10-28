@@ -3,7 +3,11 @@ import React from 'react';
 const Connection = () => {
   return (
     <div className="container">
-       <img className="center-block img-responsive" src="/connection.png"/>
+      <img
+        alt=""
+        className="center-block img-responsive"
+        src="/connection.png"
+      />
     </div>
   );
 }

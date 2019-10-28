@@ -1,23 +1,30 @@
 import React from 'react';
-import Motivation from './Motivation';
+
 import Connection from './Connection';
-import HowDoesItWork from './HowDoesItWork';
-import WhyJS from './Whyjs'
 import Footer from './Footer';
+import HowDoesItWork from './HowDoesItWork';
+import Motivation from './Motivation';
 
 const Home = () => {
   return (
     <div>
       <div className="jumbotron">
         <div className="container">
-          <img className="center-block img-responsive" src='/dethreadBlack.png' />
+          <img
+            alt="deThread"
+            className="center-block img-responsive"
+            src='/dethreadBlack.png'
+          />
           <br></br>
           <p>A library for enabling distributed computing with JavaScript.</p>
         </div>
       </div>
       <div className="container">
         <section>
-          <div className="text-center" id="CSS">
+          <div
+            className="text-center"
+            id="CSS"
+          >
             <h2> What is deThread? </h2>
             <br />
             <p>
@@ -29,9 +36,9 @@ const Home = () => {
             <Connection />
             <br />
             <br />
-            <p>Traditionally, distributed computing processes have been written with lower level 
+            <p>Traditionally, distributed computing processes have been written with lower level
             languages such as C++ and Java. However, by using JavaScript, deThread enables the distribution
-            of processes on any device with a web browser. In-browser distributed computing inherently has a 
+            of processes on any device with a web browser. In-browser distributed computing inherently has a
             low barrier to entry: users can contribute to a distributed process simply by accessing a URL.</p>
           </div>
         </section>

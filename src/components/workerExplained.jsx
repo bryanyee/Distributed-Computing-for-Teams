@@ -3,7 +3,10 @@ import React from 'react';
 const WorkerExplained = () => {
   return (
     <div>
-      <div id="worker-info" className="popup instruction-box">
+      <div
+        className="popup instruction-box"
+        id="worker-info"
+      >
         <p className="instruction-title">What are web workers?</p>
         <p>Web workers are a technology that allow a web browser to run multiple
         simultaneous scripts without interfering with the web page. By allowing the

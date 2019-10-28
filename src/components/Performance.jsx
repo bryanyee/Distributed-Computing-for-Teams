@@ -1,14 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Success from './Success';
-import WorkerInput from './WorkerInput';
-import WorkerExplained from './WorkerExplained';
-import HashInput from './HashInput';
+
 import HashExplained from './HashExplained';
+import HashInput from './HashInput';
 import LengthInput from './LengthInput';
-import Spinner from './Spinner';
+import WorkerExplained from './WorkerExplained';
+import WorkerInput from './WorkerInput';
 
 class Performance extends Component {
-  togglePopup(id, e) {
+  togglePopup = (id, e) => {
     e.preventDefault();
     const $targetInfo = $(id);
     const isVisible = $targetInfo.is(':visible');
@@ -22,7 +22,7 @@ class Performance extends Component {
       $targetInfo.hide('200');
       $otherInfoBox.hide('200');
     }
-  }
+  };
 
   render() {
 
@@ -36,14 +36,26 @@ class Performance extends Component {
           <br />
           <br />
           <div className="group">
-            <LengthInput className="form-control" updateSettings={this.props.updateSettings.bind(null, 'length')} />
+            <LengthInput
+              className="form-control"
+              updateSettings={this.props.updateSettings.bind(null, 'length')}
+            />
           </div>
           <div className="group">
-            <HashInput className="form-control inputHash" togglePopup={this.togglePopup.bind(this)} updateSettings={this.props.updateSettings.bind(null, 'hash')} />
+            <HashInput
+              className="form-control inputHash"
+              togglePopup={this.togglePopup}
+              updateSettings={this.props.updateSettings.bind(null, 'hash')}
+            />
             <HashExplained />
           </div>
           <div className="group">
-            <WorkerInput className="form-control" togglePopup={this.togglePopup.bind(this)} optimalWorkers={this.props.optimalWorkers} updateSettings={this.props.updateSettings.bind(null, 'workers')} />
+            <WorkerInput
+              className="form-control"
+              optimalWorkers={this.props.optimalWorkers}
+              togglePopup={this.togglePopup}
+              updateSettings={this.props.updateSettings.bind(null, 'workers')}
+            />
             <WorkerExplained />
           </div>
           <div className="selectGroup">
@@ -57,5 +69,17 @@ class Performance extends Component {
     );
   }
 }
+
+Performance.defaultProps = {
+  globalConnections: null,
+  optimalWorkers: 1,
+};
+
+Performance.propTypes = {
+  globalConnections: PropTypes.number,
+  optimalWorkers: PropTypes.number,
+  startMD5Decrypt: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
+};
 
 export default Performance;

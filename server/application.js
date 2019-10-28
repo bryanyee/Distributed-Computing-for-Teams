@@ -79,7 +79,7 @@ exports.socketConnection = (io) => {
       // Call any available sockets from the socketPool
       if (state.socketPool.length) distributeWork(state.socketPool.shift());
 
-      socket.broadcast.emit('client-disconnect', { globalWorkers : state.activeWorkerCount, globalConnections : state.activeSocketCount });
+      socket.broadcast.emit('client-disconnect', { globalConnections : state.activeSocketCount, globalWorkers : state.activeWorkerCount });
 
       delete state.sockets[socket.id];
     });
@@ -95,22 +95,22 @@ state = initState();
 function initState() {
   console.log('initState');
   return {
-    characterSet: undefined,
-    calculating: false,
-    hash: undefined,
-    length: undefined,
-    globalNumCombos: undefined,
-    taskIndex: 0,
-    workerFrag: undefined,
-    redistributeQueue: [],
-    startTime: undefined,
-    clearText: undefined,
-    duration: undefined,
-    sockets: {},
-    socketPool: [],
     activeSocketCount: 0, // Clients become 'active/ready' when they submit the # of workers to use
     activeWorkerCount: 0,
+    calculating: false,
+    characterSet: undefined,
+    clearText: undefined,
+    duration: undefined,
+    globalNumCombos: undefined,
+    hash: undefined,
+    length: undefined,
     master: undefined,
+    redistributeQueue: [],
+    socketPool: [],
+    sockets: {},
+    startTime: undefined,
+    taskIndex: 0,
+    workerFrag: undefined,
   };
 }
 
@@ -172,8 +172,8 @@ function distributeWork(socket) {
   var data;
   if (begin >= state.globalNumCombos) {
     data = {
-      globalNumCombos: state.globalNumCombos,
       globalConnections: state.activeSocketCount,
+      globalNumCombos: state.globalNumCombos,
       globalWorkers: state.activeWorkerCount,
       hash: state.hash,
     };
@@ -186,14 +186,14 @@ function distributeWork(socket) {
     state.taskIndex += socket.workers;
 
     data = {
-      startTime: state.startTime,
-      length: state.length,
-      globalNumCombos: state.globalNumCombos,
-      globalConnections: state.activeSocketCount,
-      globalWorkers: state.activeWorkerCount,
-      hash: state.hash,
       begin,
       end,
+      globalConnections: state.activeSocketCount,
+      globalNumCombos: state.globalNumCombos,
+      globalWorkers: state.activeWorkerCount,
+      hash: state.hash,
+      length: state.length,
+      startTime: state.startTime,
     };
 
     socket.emit('start-work', data);

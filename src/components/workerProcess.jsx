@@ -1,16 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+
 import StateHeader from './StateHeader';
 import Spinner from './Spinner'
 
 const WorkerProcess = (props) => {
-  const client = props.globalConnections === 1 ? 'client' : 'clients';
-  const worker = props.workers === 1 ? 'worker' : 'workers';
-
   return (
     <div>
       <Spinner />
       <div className="state-box">
-        <StateHeader title={'Decrypting hash'} hash={props.hash} isMaster={props.isMaster}/>
+        <StateHeader
+          hash={props.hash}
+          isMaster={props.isMaster}
+          title={'Decrypting hash'}
+        />
         <div className="dataContainer">
           <div className="dataType">
             <p>Target word length</p><hr /><br />
@@ -30,6 +33,16 @@ const WorkerProcess = (props) => {
       </div>
     </div>
   );
+};
+
+WorkerProcess.propTypes = {
+  globalConnections: PropTypes.number.isRequired,
+  globalNumCombos: PropTypes.number.isRequired,
+  globalWorkers: PropTypes.number.isRequired,
+  hash: PropTypes.string.isRequired,
+  isMaster: PropTypes.bool.isRequired,
+  length: PropTypes.number.isRequired,
+  workers: PropTypes.number.isRequired,
 };
 
 export default WorkerProcess;

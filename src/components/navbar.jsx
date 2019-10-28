@@ -8,15 +8,30 @@ class Navbar extends Component {
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <button
+                aria-controls="navbar"
+                aria-expanded="false"
+                className="navbar-toggle collapsed"
+                data-target="#navbar"
+                data-toggle="collapse"
+                type="button"
+              >
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link className="navbar-brand" to="/Home" >deThread</Link>
+              <Link
+                className="navbar-brand"
+                to="/Home"
+              >
+                deThread
+              </Link>
             </div>
-            <div id="navbar" className="navbar-collapse collapse">
+            <div
+              className="navbar-collapse collapse"
+              id="navbar"
+            >
               <ul className="nav navbar-nav navbar-right">
                 <li><NavLink to="/Home">Home</NavLink></li>
                 <li><NavLink to="/Docs">Docs</NavLink></li>

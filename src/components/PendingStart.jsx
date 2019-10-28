@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+
 import Spinner from './Spinner';
 
 const PendingStart = (props) => {
@@ -12,6 +14,11 @@ const PendingStart = (props) => {
       <Spinner />
     </div>
   );
+};
+
+PendingStart.propTypes = {
+  globalConnections: PropTypes.number.isRequired,
+  workers: PropTypes.number.isRequired,
 };
 
 export default PendingStart;

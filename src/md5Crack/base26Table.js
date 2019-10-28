@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const base26Table = {
   0: 'a',
   1: 'b',
@@ -26,4 +27,3 @@ const base26Table = {
   o: 'y',
   p: 'z',
 };
-

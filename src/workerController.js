@@ -14,8 +14,8 @@ function startWorkers(passwordCracked, begin, end, numWorkers, hash, length, sta
   localSocket = socket;
   const numCombos = end - begin + 1;
   const workerFrag = Math.floor(numCombos / numWorkers);
-  const remainder = numCombos % numWorkers; 
-  
+  const remainder = numCombos % numWorkers;
+
   for (let i = 0; i < numWorkers; i += 1) {
     const workerBegin = begin + (workerFrag * i);
     let workerEnd = workerBegin + (workerFrag - 1);
@@ -32,7 +32,7 @@ function startWorkers(passwordCracked, begin, end, numWorkers, hash, length, sta
       workerArr.push(worker);
     }
 
-    worker.postMessage({ cmd: 'start', hash, id, workerBegin, workerEnd, length });
+    worker.postMessage({ cmd: 'start', hash, id, length, workerBegin, workerEnd });
   }
 }
 
@@ -56,7 +56,7 @@ function handleMessage(e) {
 
 function terminateAllWorkers() {
   while (workerArr.length) {
-    const worker = workerArr.pop(); 
+    const worker = workerArr.pop();
     worker.terminate();
   }
 }

@@ -1,11 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+
 import Pending from './Pending';
 import Performance from './Performance';
 import Participate from './Participate';
 import WorkerProcess from './WorkerProcess';
 import Success from './Success';
 import Host from './Host';
+
 import { initSocket, disconnectSocket } from '../Socket';
 import { startWorkers, terminateAllWorkers } from '../workerController';
 
@@ -13,25 +16,25 @@ let socket;
 
 function initSessionState() {
 	return {
-		charset: undefined,
-		userParticipation: false,
-		ready: false,
-		hasMaster: false,
-		isMaster: false,
+		begin: undefined,
 		calculating: false,
-		globalConnections: undefined,
-		globalWorkers: undefined,
-		globalNumCombos: undefined,
-		noTasksAvailable: false,
+		charset: undefined,
 		clearText: undefined,
 		duration: undefined,
-		length: undefined,
-		workers: undefined,
-		optimalWorkers: undefined,
-		hash: undefined,
-		begin: undefined,
 		end: undefined,
-		startTime: undefined
+		globalConnections: undefined,
+		globalNumCombos: undefined,
+		globalWorkers: undefined,
+		hash: undefined,
+		hasMaster: false,
+		isMaster: false,
+		length: undefined,
+		noTasksAvailable: false,
+		optimalWorkers: undefined,
+		ready: false,
+		startTime: undefined,
+		userParticipation: false,
+		workers: undefined,
 	};
 }
 
@@ -74,7 +77,7 @@ class JoinSession extends Component {
 		});
 
 		socket.on('master-claimed', (data) => {
-			this.setState({ hasMaster: true, globalConnections: data.globalConnections });
+			this.setState({ globalConnections: data.globalConnections, hasMaster: true });
 		});
 
 		socket.on('new-client-ready', (data) => {
@@ -84,7 +87,7 @@ class JoinSession extends Component {
 		socket.on('start-work', this.startWork);
 
 		socket.on('no-available-tasks', (data) => {
-			this.setState({ ...data, noTasksAvailable: true, calculating: true });
+			this.setState({ ...data, calculating: true, noTasksAvailable: true });
 		});
 
 		socket.on('password-found', (data) => {
@@ -105,7 +108,7 @@ class JoinSession extends Component {
 		});
 
 		// Handlers for connection events
-		socket.on('connect_error', (e) => {
+		socket.on('connect_error', (_e) => {
 			console.log('connection error', socket.id);
 		});
 
@@ -113,7 +116,7 @@ class JoinSession extends Component {
 			console.log('socket reconnected', socket.id);
 		})
 
-		socket.on('reconnect_error', (e) => {
+		socket.on('reconnect_error', (_e) => {
 			console.log('reconnect connection error', socket.id);
 		})
 
@@ -154,15 +157,15 @@ class JoinSession extends Component {
 
 	startWork(data) {
 		const newState = {
-			startTime: data.startTime,
-			length: data.length,
-			globalNumCombos: data.globalNumCombos,
+			begin: data.begin,
+			calculating: true,
+			end: data.end,
 			globalConnections: data.globalConnections,
+			globalNumCombos: data.globalNumCombos,
 			globalWorkers: data.globalWorkers,
 			hash: data.hash,
-			begin: data.begin,
-			end: data.end,
-			calculating: true,
+			length: data.length,
+			startTime: data.startTime,
 		};
 
 		startWorkers(this.passwordCracked, data.begin, data.end, this.state.workers, data.hash, data.length, data.startTime, this.requestMoreWork, socket);
@@ -199,5 +202,11 @@ class JoinSession extends Component {
 		);
 	}
 }
+
+JoinSession.propTypes = {
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired,
+	}),
+};
 
 export default withRouter(JoinSession);

@@ -1,15 +1,20 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+
 import StateHeader from './StateHeader';
 
 const Success = (props) => {
   const dur = props.duration === 1 ? 'second' : 'seconds';
-  const client = props.globalConnections === 1 ? 'client' : 'clients';
-  const worker = props.workers === 1 ? 'worker' : 'workers';
 
   return (
     <div>
       <div className="state-box">
-        <StateHeader title={'Password Found'} hash={props.hash} clearText={props.clearText} isMaster={props.isMaster}/>
+        <StateHeader
+          clearText={props.clearText}
+          hash={props.hash}
+          isMaster={props.isMaster}
+          title={'Password Found'}
+        />
         <div className="dataContainer">
           <div className="dataType">
             <p>Duration</p><hr /><br />
@@ -29,6 +34,21 @@ const Success = (props) => {
       </div>
     </div>
   );
+};
+
+Success.defaultProps = {
+  duration: null,
+};
+
+Success.propTypes = {
+  clearText: PropTypes.string.isRequired,
+  duration: PropTypes.number,
+  globalConnections: PropTypes.number.isRequired,
+  globalWorkers: PropTypes.number.isRequired,
+  hash: PropTypes.string.isRequired,
+  isMaster: PropTypes.bool.isRequired,
+  length: PropTypes.number.isRequired,
+  workers: PropTypes.number.isRequired,
 };
 
 export default Success;

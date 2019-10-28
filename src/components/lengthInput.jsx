@@ -1,13 +1,26 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const LengthInput = (props) => {
+const LengthInput = ({ updateSettings }) => {
   return (
     <div>
-      <input className="inputMaterial numInput" type="number" id="length" name="Length" min="0" placeholder="Length of Word" onChange={props.updateSettings} />
+      <input
+        className="inputMaterial numInput"
+        id="length"
+        min="0"
+        name="Length"
+        onChange={updateSettings}
+        placeholder="Length of Word"
+        type="number"
+      />
       <span className="highlight"></span>
       <span className="bar"></span>
     </div>
   );
+};
+
+LengthInput.propTypes = {
+  updateSettings: PropTypes.func.isRequired,
 };
 
 export default LengthInput;
